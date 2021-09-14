@@ -10,33 +10,48 @@
 
     <script>
         var str = "O rato RoEu a roupa do rei de Roma";
-        var lista_palavras = ['RATO','ROUPA','ROMA'];
-        var teste = "ROEU";
-        console.log('Palavra procurada: ',teste);
-        console.log('*******************');
-        //gerar o regex
-        var palavra = new RegExp(teste, 'gi');
-        
-        cria_regex(lista_palavras);
-        //var adicionar = frutas.push('Laranja');
+        var lista_palavras = ['RATO','ROEU','ROMA'];
+
+        console.log('Texto => ',str);
+        console.log('Palavras procuradas no texto ==> ',lista_palavras);
+        console.log('***********************************************');
+             
+                
         function cria_regex(palavras){
             let vetor_regex = [];
             for (var i = 0; i < palavras.length; i++){
-                console.log(palavras[i]);
+                //console.log(palavras[i]);
                 vetor_regex.push(new RegExp(palavras[i], 'gi'));
                  
             }
-            console.log('Mostra o vetor de regex criado com as plavras: ',vetor_regex);
+            return vetor_regex;
         }
 
-        function achar(str,palavra){
-            var resultado = str.match(palavra);
-            console.log(typeof(resultado));
-            console.log('Palavra encontrada: ',resultado);
-   
+        function acha_lista(str,vetor_regex_criado){
+            var tam = vetor_regex_criado.length;
+            var resultados = [];
+            console.log('Tamanho do vetor: ',tam);
+            for (var i=0; i < tam; i++){
+                resultados.push(str.match(vetor_regex_criado[i]));
+            }
+            //console.log(resultados);
+            return resultados;
         }
+        
+        vetor_regex_criado = cria_regex(lista_palavras);
+        console.log('Vetor Regex criado: ',vetor_regex_criado);
+        console.log('***********************************************');
+        //achar(str,palavra);
+        var encontrados = acha_lista(str,vetor_regex_criado);
+        console.log('Palavras encontradas no texto: ',encontrados);
+        for (var i = 0; i < encontrados.length; i++){
+            console.log(encontrados[i][0]);
+        }
+        
 
-        achar(str,palavra);
+        
+
+
 
     </script>
     
