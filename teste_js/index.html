@@ -7,11 +7,20 @@
     <title>Document</title>
 </head>
 <body>
+    <h1>Ítem 01 - Texto Base</h1>
+    <div id="texto"></div>
+
+    <h1>Ítem 02 - Palavras a serem pesquisadas no texto</h1>
+    <div id="palavras"></div>
+
+    <p>Com base nas palavras do ítem 02 e pesquisadas no Ítem 01, foram encontradas as seguintes palavras:</p>
+    <div id="encontradas"></div>
 
     <script>
         var str = "O rato RoEu a roupa do rei de Roma";
-        var lista_palavras = ['RATO','ROEU','ROMA'];
-
+        document.getElementById("texto").innerHTML = str;
+        var lista_palavras = ['RATO','ROEU','ROMA','BRASIL','ESCOLA','PRESIDENTE'];
+        document.getElementById("palavras").innerHTML = lista_palavras;
         console.log('Texto => ',str);
         console.log('Palavras procuradas no texto ==> ',lista_palavras);
         console.log('***********************************************');
@@ -44,11 +53,13 @@
         //achar(str,palavra);
         var encontrados = acha_lista(str,vetor_regex_criado);
         console.log('Palavras encontradas no texto: ',encontrados);
-        for (var i = 0; i < encontrados.length; i++){
-            console.log(encontrados[i][0]);
-        }
+        // for (var i = 0; i < encontrados.length; i++){
+        //     console.log(encontrados[i][0]);
+            
+        // }
         
-
+        document.getElementById("encontradas").innerHTML = '<b>'+ encontrados + '</b>';
+        
         
 
 
