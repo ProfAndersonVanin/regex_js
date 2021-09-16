@@ -1,11 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        .mudacor {
+            color: red;
+        }
+    </style>
 </head>
+
 <body>
     <h1>Ítem 01 - Texto Base</h1>
     <div id="texto"></div>
@@ -16,55 +23,70 @@
     <p>Com base nas palavras do ítem 02 e pesquisadas no Ítem 01, foram encontradas as seguintes palavras:</p>
     <div id="encontradas"></div>
 
+    <p>Resultado de marcação</p>
+    <div id="resultados"></div>
+
     <script>
         var str = "O rato RoEu a roupa do rei de Roma";
         document.getElementById("texto").innerHTML = str;
-        var lista_palavras = ['RATO','ROEU','ROMA','BRASIL','ESCOLA','PRESIDENTE'];
+        var lista_palavras = ['RATO', 'ROEU', 'ROMA', 'rOUpA'];
         document.getElementById("palavras").innerHTML = lista_palavras;
-        console.log('Texto => ',str);
-        console.log('Palavras procuradas no texto ==> ',lista_palavras);
-        console.log('***********************************************');
-             
-                
-        function cria_regex(palavras){
+        // console.log('Texto => ', str);
+        // console.log('Palavras procuradas no texto ==> ', lista_palavras);
+        // console.log('***********************************************');
+
+
+        function cria_regex(palavras) {
             let vetor_regex = [];
-            for (var i = 0; i < palavras.length; i++){
+            for (var i = 0; i < palavras.length; i++) {
                 //console.log(palavras[i]);
                 vetor_regex.push(new RegExp(palavras[i], 'gi'));
-                 
             }
             return vetor_regex;
         }
 
-        function acha_lista(str,vetor_regex_criado){
+        function acha_lista(str, vetor_regex_criado) {
             var tam = vetor_regex_criado.length;
             var resultados = [];
-            console.log('Tamanho do vetor: ',tam);
-            for (var i=0; i < tam; i++){
+            //console.log('Tamanho do vetor: ', tam);
+            for (var i = 0; i < tam; i++) {
                 resultados.push(str.match(vetor_regex_criado[i]));
             }
             //console.log(resultados);
             return resultados;
         }
-        
+
         vetor_regex_criado = cria_regex(lista_palavras);
-        console.log('Vetor Regex criado: ',vetor_regex_criado);
-        console.log('***********************************************');
+        // console.log('Vetor Regex criado: ', vetor_regex_criado);
+        // console.log('***********************************************');
         //achar(str,palavra);
-        var encontrados = acha_lista(str,vetor_regex_criado);
-        console.log('Palavras encontradas no texto: ',encontrados);
-        // for (var i = 0; i < encontrados.length; i++){
-        //     console.log(encontrados[i][0]);
-            
-        // }
-        
-        document.getElementById("encontradas").innerHTML = '<b>'+ encontrados + '</b>';
-        
-        
+        var encontrados = acha_lista(str, vetor_regex_criado);
+        //console.log('Palavras encontradas no texto: ', encontrados);
+
+        document.getElementById("encontradas").innerHTML = '<b>' + encontrados + '</b>';
 
 
+        // var termo = (encontrados[3][0]);
+        // var marcado = str.replace(termo, "<span class='mudacor'>" + termo + "</span>");
+        // document.getElementById('resultados').innerHTML = marcado;
+
+        //função para marcar todas as palavras
+        function marca_tudo(encontrados, str) {
+            var tam = encontrados.length;
+            for (var i = 0; i < tam; i++) {
+                var marcado = str.split((encontrados[i][0]).join("<span class='mudacor'>" + (encontrados[i][0]) + "</span>"));
+
+            }
+            console.log(marcado);
+            return marcado;
+        }
+
+        var final = marca_tudo(encontrados, str);
+        document.getElementById('resultados').innerHTML = final;
+        //redacao_min_formatada = redacao_min_formatada.split(((incidencia[j]))).join("<b style ='color:" + cor + "'>" + (incidencia[j]) + "</b>");
 
     </script>
-    
+
 </body>
+
 </html>
